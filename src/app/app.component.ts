@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthenticationService } from './services/authentication.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+
+  constructor(public authService: AuthenticationService, private router: Router){
+
+  }
+
   title = 'RushApp';
+
+  logout(){
+    this.authService.logout().subscribe(() => {
+      this.router.navigate(['/login']);
+    });
+  }
 }
